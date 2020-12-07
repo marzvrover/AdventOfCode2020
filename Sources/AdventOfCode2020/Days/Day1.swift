@@ -9,32 +9,11 @@ import Foundation
 import Rainbow
 
 struct Day1: Day {
-    func resultString(input inputIn: String?) -> String {
-        let input = inputIn ?? self.input
-
-        let parts: [(String) -> Int?] = [self.findNumberPart1, self.findNumberPart2]
-
-        var output: String? = nil
-
-        for (index, part) in parts.enumerated() {
-            let value: Int? = part(input)
-            let result: String
-            if value == nil {
-                result = "no number combinations could be found".lightRed
-            } else {
-                result = String(value!).lightGreen
-            }
-
-            let display = "\tPart \(index): \(result)"
-
-            if output == nil {
-                output = display
-            } else {
-                output!.append("\n\(display)")
-            }
-        }
-
-        return output!
+    func resultString(input: String?) -> String {
+        return resultStringHelper(input: input ?? self.input,
+                                  parts: [self.findNumberPart1,
+                                          self.findNumberPart2],
+                                  errorMessage: "no number could be found")
     }
 
     func findNumberPart1(input: String) -> Int? {

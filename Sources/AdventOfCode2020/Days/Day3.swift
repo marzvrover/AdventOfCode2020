@@ -24,32 +24,11 @@ fileprivate extension StringProtocol {
 
 
 struct Day3: Day {
-    func resultString(input inputIn: String?) -> String {
-        let input = inputIn ?? self.input
-
-        let parts: [(String) -> Int?] = [self.countTreesPart1, self.countTreesPart2]
-
-        var output: String? = nil
-
-        for (index, part) in parts.enumerated() {
-            let value: Int? = part(input)
-            let result: String
-            if value == nil {
-                result = "path will always fail".lightRed
-            } else {
-                result = String(value!).lightGreen
-            }
-
-            let display = "\tPart \(index): \(result)"
-
-            if output == nil {
-                output = display
-            } else {
-                output!.append("\n\(display)")
-            }
-        }
-
-        return output!
+    func resultString(input: String?) -> String {
+        return resultStringHelper(input: input ?? self.input,
+                                  parts: [self.countTreesPart1,
+                                          self.countTreesPart2],
+                                  errorMessage: "path will always fail")
     }
 
     func countTreesPart1(input: String) -> Int? {
