@@ -14,8 +14,12 @@ protocol Day {
 
 print("Welcome to Marz's Advent of Code 2020".green)
 
-let day1 = Day1()
-print("Day one:\n\(day1.resultString())")
+let days: [(day: Day, name: String)] = [
+    (day: Day1(), name: "one"),
+    (day: Day2(), name: "two"),
+    (day: Day3(), name: "three"),
+]
 
-let day2 = Day2()
-print("Day two:\n\(day2.resultString())")
+for (day, name) in days {
+    print("Day \(name):\n\(day.resultString(input: nil))")
+}

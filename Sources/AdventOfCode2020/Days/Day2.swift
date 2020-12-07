@@ -30,28 +30,32 @@ fileprivate extension Bool {
 }
 
 struct Day2: Day {
-    func resultString(input inputIn: String? = nil) -> String {
+    func resultString(input inputIn: String?) -> String {
         let input = inputIn ?? self.input
 
-        let part1Value = self.countValidPart1(input: input)
-        let part1Result: String
-        if part1Value == nil {
-            part1Result = "no valid passwords could be found".lightRed
-        } else {
-            part1Result = String(part1Value!).lightGreen
+        let parts: [(String) -> Int?] = [self.countValidPart1, self.countValidPart2]
+
+        var output: String? = nil
+
+        for (index, part) in parts.enumerated() {
+            let value: Int? = part(input)
+            let result: String
+            if value == nil {
+                result = "no valid passwords could be found".lightRed
+            } else {
+                result = String(value!).lightGreen
+            }
+
+            let display = "\tPart \(index): \(result)"
+
+            if output == nil {
+                output = display
+            } else {
+                output!.append("\n\(display)")
+            }
         }
 
-        let part2Value = self.countValidPart2(input: input)
-        let part2Result: String
-        if part2Value == nil {
-            part2Result = "no valid passwords could be found".lightRed
-        } else {
-            part2Result = String(part2Value!).lightGreen
-        }
-
-        let result = "\tPart 1: \(part1Result)\n\tPart 2: \(part2Result)"
-
-        return result
+        return output!
     }
 
     func countValidPart1(input: String) -> Int? {
