@@ -1,16 +1,39 @@
-import Foundation
+//
+//  Day1.swift
+//
+//
+//  Created by Marz Rover on 12/6/20.
+//
 
-struct Day1 {
+import Foundation
+import Rainbow
+
+struct Day1: Day {
     func resultString(input inputIn: String? = nil) -> String {
         let input = inputIn ?? self.input
 
-        guard let result = self.findNumber(input: input) else {
-            return "no number could be found"
+        let part1Value = self.findNumberPart1(input: input)
+        let part1Result: String
+        if part1Value == nil {
+            part1Result = "no numbers could be found".lightRed
+        } else {
+            part1Result = String(part1Value!).lightGreen
         }
-        return String(result)
+
+        let part2Value = self.findNumberPart2(input: input)
+        let part2Result: String
+        if part2Value == nil {
+            part2Result = "no numbers could be found".lightRed
+        } else {
+            part2Result = String(part2Value!).lightGreen
+        }
+
+        let result = "\tPart 1: \(part1Result)\n\tPart 2: \(part2Result)"
+
+        return result
     }
 
-    func findNumber(input: String) -> Int? {
+    func findNumberPart1(input: String) -> Int? {
         var numbers: [Int] = []
     
         var result: Int? = nil
@@ -35,6 +58,35 @@ struct Day1 {
 
         return result
     }
+
+    func findNumberPart2(input: String) -> Int? {
+        var numbers: [Int] = []
+    
+        var result: Int? = nil
+
+        input.enumerateLines { line, stop in
+            let trimmed = line.trimmingCharacters(in: .whitespaces)
+            guard let number = Int(trimmed) else {
+                return
+            }
+
+            for x in numbers {
+                for y in numbers {
+                    if x + y + number == 2020 {
+                        result = x * y * number
+                        stop = true
+                    }
+                }
+            }
+
+            if number < 2020 {
+                numbers.append(number)
+            }
+        }
+
+        return result
+    }
+
 
     let input = """
         1632
