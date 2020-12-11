@@ -25,7 +25,7 @@ extension Day {
                 result = String(value!).lightGreen
             }
 
-            let display = "\tPart \(index): \(result)"
+            let display = "\tPart \(index + 1): \(result)"
 
             if output == nil {
                 output = display
@@ -40,12 +40,13 @@ extension Day {
 
 print("Welcome to Marz's Advent of Code 2020".green)
 
-let days: [String:Day] = [
-    "one": Day1(),
-    "two": Day2(),
-    "three": Day3(),
+let days: [(day: Day, name: String)] = [
+    (day: Day1(), name: "one"),
+    (day: Day2(), name: "two"),
+    (day: Day3(), name: "three"),
+    (day: Day4(), name: "four"),
 ]
 
-for (name, day) in days {
+for (day, name) in days {
     print("Day \(name):\n\(day.resultString(input: nil))")
 }
