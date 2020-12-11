@@ -9,7 +9,7 @@ import Foundation
 import Rainbow
 
 protocol Day {
-    func resultString(input: String?) -> String
+    func resultString(input: String) -> String
 }
 
 extension Day {
@@ -40,13 +40,15 @@ extension Day {
 
 print("Welcome to Marz's Advent of Code 2020".green)
 
-let days: [(day: Day, name: String)] = [
-    (day: Day1(), name: "one"),
-    (day: Day2(), name: "two"),
-    (day: Day3(), name: "three"),
-    (day: Day4(), name: "four"),
+let days: [(day: Day, number: String, resource: String)] = [
+    (day: Day1(), number: "one", resource: "day1"),
+    (day: Day2(), number: "two", resource: "day2"),
+    (day: Day3(), number: "three", resource: "day3"),
+    (day: Day4(), number: "four", resource: "day4"),
 ]
 
-for (day, name) in days {
-    print("Day \(name):\n\(day.resultString(input: nil))")
+for (day, number, resource) in days {
+    let url = Bundle.module.url(forResource: resource, withExtension: "txt")!
+    let file = try! String(contentsOf: url)
+    print("Day \(number):\n\(day.resultString(input: file))")
 }
