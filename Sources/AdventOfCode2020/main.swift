@@ -16,6 +16,8 @@ let days: [(day: Day, number: String, resource: String)] = [
     (day: Day3(), number: "three", resource: "day3"),
     (day: Day4(), number: "four", resource: "day4"),
     (day: Day5(), number: "five", resource: "day5"),
+    (day: Day6(), number: "six", resource: "day6"),
+    (day: Day7(), number: "seven", resource: "day7"),
 ]
 
 for (day, number, resource) in days {
