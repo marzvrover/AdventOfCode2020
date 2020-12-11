@@ -12,12 +12,44 @@ public struct Day5: Day {
 
     public func resultString(input: String) -> String {
         return resultStringHelper(input: input,
-                                  parts: [self.findHighestSeatId],
+                                  parts: [self.findHighestSeatId,
+                                          self.findMySeatId],
                                   errorMessage: "no seat could be found")
     }
 
     func findHighestSeatId(input: String) -> Int? {
+        var highest = 0
+        input.enumerateLines { line, _ in
+            let seat = Self.processBoardingPass(input: line).seat
+            if seat > highest {
+                highest = seat
+            }
+        }
+        return highest
+    }
+
+    func findMySeatId(input: String) -> Int? {
+        var seats: [Int] = []
+        input.enumerateLines { line, _ in
+            seats.append(Self.processBoardingPass(input: line).seat)
+        }
+        let missing = Self.findMissingSeats(input: seats)
+        for seat in missing {
+            if !missing.contains(seat-1) && !missing.contains(seat+1) {
+                return seat
+            }
+        }
         return nil
+    }
+
+    static func findMissingSeats(input: [Int]) -> [Int] {
+        var missing: [Int] = []
+        for number in 0...input.max()! {
+            if !input.contains(number) {
+                missing.append(number)
+            }
+        }
+        return missing
     }
 
     static func processBoardingPass(input: String) -> (row: Int, col: Int, seat: Int) {
@@ -27,37 +59,16 @@ public struct Day5: Day {
     }
 
     static func calculateRow(_ input: Substring) -> Int? {
-        return 0
+        let out = String(input)
+            .replacingOccurrences(of: "F", with: "0")
+            .replacingOccurrences(of: "B", with: "1")
+        return Int(out, radix: 2)
     }
-/*
-     The last three characters will be either L or R; these specify exactly one of the 8 columns of seats on the plane (numbered 0 through 7). The same process as above proceeds again, this time with only three steps. L means to keep the lower half, while R means to keep the upper half.
 
-     For example, consider just the last 3 characters of FBFBBFFRLR:
-
-     Start by considering the whole range, columns 0 through 7.
-     R means to take the upper half, keeping columns 4 through 7.
-     L means to take the lower half, keeping columns 4 through 5.
-     The final R keeps the upper of the two, column 5.
-     
-     LRL
-     8
-     4
-
-     */
     static func calculateCol(_ input: Substring) -> Int? {
-        var range = 1...8
-        for char in input {
-            switch char {
-                case "L":
-                    range = range.lowerBound...(range.upperBound/2)
-                    break
-                case "R":
-                    range = (range.upperBound/2)...range.upperBound
-                    break
-                default:
-                    return nil
-            }
-        }
-        return range.lowerBound - 1
+        let out = String(input)
+            .replacingOccurrences(of: "L", with: "0")
+            .replacingOccurrences(of: "R", with: "1")
+        return Int(out, radix: 2)
     }
 }
