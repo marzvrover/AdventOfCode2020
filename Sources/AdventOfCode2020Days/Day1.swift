@@ -8,8 +8,10 @@
 import Foundation
 import Rainbow
 
-struct Day1: Day {
-    func resultString(input: String) -> String {
+public struct Day1: Day {
+    public init() {}
+
+    public func resultString(input: String) -> String {
         return resultStringHelper(input: input,
                                   parts: [self.findNumberPart1,
                                           self.findNumberPart2],

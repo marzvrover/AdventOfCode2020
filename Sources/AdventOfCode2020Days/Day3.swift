@@ -22,9 +22,10 @@ fileprivate extension StringProtocol {
     subscript(range: PartialRangeUpTo<Int>) -> SubSequence { self[..<index(startIndex, offsetBy: range.upperBound)] }
 }
 
+public struct Day3: Day {
+    public init() {}
 
-struct Day3: Day {
-    func resultString(input: String) -> String {
+    public func resultString(input: String) -> String {
         return resultStringHelper(input: input,
                                   parts: [self.countTreesPart1,
                                           self.countTreesPart2],

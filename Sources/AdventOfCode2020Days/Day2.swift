@@ -29,8 +29,10 @@ fileprivate extension Bool {
     }
 }
 
-struct Day2: Day {
-    func resultString(input: String) -> String {
+public struct Day2: Day {
+    public init() {}
+
+    public func resultString(input: String) -> String {
         return resultStringHelper(input: input,
                                   parts: [self.countValidPart1,
                                           self.countValidPart2],

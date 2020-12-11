@@ -6,37 +6,7 @@
 //
 
 import Foundation
-import Rainbow
-
-protocol Day {
-    func resultString(input: String) -> String
-}
-
-extension Day {
-    func resultStringHelper(input: String, parts: [(String) -> Int?], errorMessage: String) -> String {
-        var output: String? = nil
-
-        for (index, part) in parts.enumerated() {
-            let value: Int? = part(input)
-            let result: String
-            if value == nil {
-                result = errorMessage.lightRed
-            } else {
-                result = String(value!).lightGreen
-            }
-
-            let display = "\tPart \(index + 1): \(result)"
-
-            if output == nil {
-                output = display
-            } else {
-                output!.append("\n\(display)")
-            }
-        }
-
-        return output!
-    }
-}
+import AdventOfCode2020Days
 
 print("Welcome to Marz's Advent of Code 2020".green)
 
@@ -45,6 +15,7 @@ let days: [(day: Day, number: String, resource: String)] = [
     (day: Day2(), number: "two", resource: "day2"),
     (day: Day3(), number: "three", resource: "day3"),
     (day: Day4(), number: "four", resource: "day4"),
+    (day: Day5(), number: "five", resource: "day5"),
 ]
 
 for (day, number, resource) in days {

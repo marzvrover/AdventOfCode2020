@@ -7,8 +7,10 @@
 
 import Foundation
 
-struct Day4: Day {
-    func resultString(input: String) -> String {
+public struct Day4: Day {
+    public init() {}
+
+    public func resultString(input: String) -> String {
         return resultStringHelper(input: input,
                                   parts: [self.countValidCredentials1,
                                           self.countValidCredentials2],
