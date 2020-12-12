@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "Heap",
+        "repositoryURL": "https://github.com/swiftpackages/Heap.git",
+        "state": {
+          "branch": null,
+          "revision": "52d4abbd2df85851b6ed7104e72abbd8f49b0e6c",
+          "version": "1.1.1"
+        }
+      },
+      {
         "package": "Rainbow",
         "repositoryURL": "https://github.com/onevcat/Rainbow",
         "state": {
