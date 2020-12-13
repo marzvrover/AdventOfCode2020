@@ -53,14 +53,48 @@ public struct Day10: Day {
     }
 
     static func combinationsTotal(input: String) -> Int? {
-        var adapters: [Int] = []
+        var adapters: [Int] = [0]
         input.enumerateLines { line, _ in
             let adapter = Int(line)!
             adapters.append(adapter)
         }
         adapters.append(adapters.max()! + 3)
         adapters.sort(by: { $0 < $1 })
-        
-        return nil
+
+        var groupOfOnesCount: [Int] = []
+        var currentCount = 0
+        for index in 0...(adapters.count - 2) {
+            if adapters[index+1] - adapters[index] == 1 {
+                currentCount += 1
+            } else {
+                currentCount -= 1
+                if currentCount >= 1 {
+                    groupOfOnesCount.append(currentCount)
+                }
+                currentCount = 0
+            }
+        }
+
+        var totalCombinations = 1
+
+        for group in groupOfOnesCount {
+            totalCombinations *= combinations(group)!
+        }
+
+        return totalCombinations
+    }
+
+    static func combinations(_ x: Int) -> Int? {
+        if x == 0 {
+            return 1
+        } else if x == 1 {
+            return 2
+        } else if x == 2 {
+            return 4
+        } else if x > 2 {
+            return combinations(x-1)! + combinations(x-2)! + combinations(x-3)!
+        } else {
+            return nil
+        }
     }
 }

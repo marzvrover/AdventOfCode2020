@@ -2,7 +2,20 @@ import XCTest
 @testable import AdventOfCode2020Days
 
 final class Day10Tests: XCTestCase {
-    let input = """
+    let input1 = """
+    16
+    10
+    15
+    5
+    1
+    11
+    7
+    19
+    6
+    12
+    4
+    """
+    let input2 = """
     28
     33
     18
@@ -37,10 +50,17 @@ final class Day10Tests: XCTestCase {
     """
 
     func testAllAdaptersJoltDifferences() {
-        XCTAssertEqual(Day10.allAdaptersJoltDifferences(input: input), 220)
+        XCTAssertEqual(Day10.allAdaptersJoltDifferences(input: input1), 35)
+        XCTAssertEqual(Day10.allAdaptersJoltDifferences(input: input2), 220)
+    }
+
+    func testTotalCombinations() {
+        XCTAssertEqual(Day10.combinationsTotal(input: input1), 8)
+        XCTAssertEqual(Day10.combinationsTotal(input: input2), 19208)
     }
 
     static var allTests = [
+        ("testTotalCombinations", testTotalCombinations),
         ("testAllAdaptersJoltDifferences", testAllAdaptersJoltDifferences),
     ]
 }
