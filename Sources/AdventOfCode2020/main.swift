@@ -21,10 +21,11 @@ let allDays: [(day: Day, number: String, resource: String)] = [
     (day: Day9(), number: "nine", resource: "day9"),
     (day: Day10(), number: "ten", resource: "day10"),
     (day: Day11(), number: "eleven", resource: "day11"),
+    (day: Day12(), number: "twelve", resource: "day12"),
 ]
 
 enum Days: String, EnumerableFlag {
-    case Day1, Day2, Day3, Day4, Day5, Day6, Day7, Day8, Day9, Day10, Day11
+    case Day1, Day2, Day3, Day4, Day5, Day6, Day7, Day8, Day9, Day10, Day11, Day12
 }
 
 struct AdventOfCode2020: ParsableCommand {

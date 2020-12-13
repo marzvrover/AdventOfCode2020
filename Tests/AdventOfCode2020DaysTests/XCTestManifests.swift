@@ -10,6 +10,7 @@ public func allTests() -> [XCTestCaseEntry] {
         testCase(Day9Tests.allTests),
         testCase(Day10Tests.allTests),
         testCase(Day11Tests.allTests),
+        testCase(Day12Tests.allTests),
     ]
 }
 #endif
